@@ -21,7 +21,6 @@ export default function Dashboard() {
         <div className="gridItem">
           <h2>Lagerbestand</h2>
         </div>
-
         <div className="gridItem">
           <Link href="/ansaatplan">
             <h2>Manage Ansaatplan</h2>
