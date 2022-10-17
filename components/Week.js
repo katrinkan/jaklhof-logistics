@@ -17,12 +17,13 @@ export default function Week() {
     <div className={styles.container}>
       <h2 className={styles.heading}>Woche {week}</h2>
       <form className={styles.form}>
-        <label for="week" className={styles.label}>
+        <label htmlFor="week" className={styles.label}>
           Woche ändern
         </label>
         <input
           type="number"
           name="week"
+          id="week"
           min="1"
           max="52"
           onChange={handleChange}

@@ -12,23 +12,27 @@ export default function Login() {
 
       <h1 className={styles.heading}>Login</h1>
       <form className={styles.loginForm}>
-        <label for="email" className={styles.labelEmail}>
+        <label htmlFor="email" className={styles.labelEmail}>
           Email
         </label>
         <br />
         <input
           type="email"
+          name="email"
+          id="email"
           placeholder="Email"
           required
           className={styles.formContent}
         />
         <br />
-        <label for="password" className={styles.labelPassword}>
+        <label htmlFor="password" className={styles.labelPassword}>
           Password
         </label>
         <br />
         <input
           type="password"
+          name="password"
+          id="password"
           placeholder="Password"
           required
           className={styles.formContent}

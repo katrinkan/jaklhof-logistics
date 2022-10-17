@@ -39,10 +39,11 @@ export default function Ansaatplan() {
           </div>
         </div>
         <form className={styles.form}>
-          <label for="amountPots">Anzahl ändern</label>
+          <label htmlFor="amountPots">Anzahl ändern</label>
           <input
             type="number"
             name="amountPots"
+            id="amountPots"
             min="0"
             max="100"
             defaultValue="6"
@@ -79,10 +80,11 @@ export default function Ansaatplan() {
           </div>
         </div>
         <form className={styles.form}>
-          <label for="amountPots">Anzahl ändern</label>
+          <label htmlFor="amountPotsTwo">Anzahl ändern</label>
           <input
             type="number"
-            name="amountPots"
+            name="amountPotsTwo"
+            id="amountPots"
             min="0"
             max="100"
             defaultValue="6"
