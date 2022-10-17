@@ -13,8 +13,6 @@ export default function Week() {
     setWeek(event.target.value);
   };
 
-  console.log(week);
-
   return (
     <div className={styles.container}>
       <h2 className={styles.heading}>Woche {week}</h2>

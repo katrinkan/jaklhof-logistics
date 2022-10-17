@@ -24,23 +24,7 @@
   padding-right: 130px;
   font-size: 20px;
 }
-.btn {
-  padding: 10px 28px;
-  margin-top: 10px;
-  background-color: #5c9335;
-  box-shadow: none;
-  color: white;
-  border: 1px solid #5c9335;
-  border-radius: 8px;
-  font-weight: 600;
-  text-transform: uppercase;
-  min-width: 210px;
-}
-.btn:hover {
-  cursor: pointer;
-  background-color: white;
-  color: #5c9335;
-}
+
 .logo {
   display: flex;
   justify-content: center;

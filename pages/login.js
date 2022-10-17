@@ -34,7 +34,7 @@ export default function Login() {
           className={styles.formContent}
         />
         <br />
-        <input type="submit" value="Login" className={styles.btn} />
+        <input type="submit" value="Login" className="btn" />
       </form>
       <div className={styles.logo}>
         <Image src={jaklhofSonne} width={90} height={90} />

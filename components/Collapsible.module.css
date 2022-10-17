@@ -1,0 +1,19 @@
+.content {
+  border: 1px solid rgb(128, 123, 123);
+  padding: 0.5rem;
+  border-radius: 5px;
+}
+
+.contentParent {
+  height: 0px;
+  overflow: hidden;
+  transition: height ease 0.9s;
+}
+
+.contentShow {
+  height: 490px;
+}
+.btn {
+  width: 100%;
+  padding: 20px;
+}

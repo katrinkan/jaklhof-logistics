@@ -1,0 +1,20 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 3fr);
+  text-align: center;
+  margin-top: 80px;
+  grid-gap: 20px;
+}
+.gridItem {
+  background-color: #5c9335;
+  border-radius: 8px;
+  padding: 30px 0;
+  color: white;
+  border: 1px solid #5c9335;
+  max-height: 70px;
+}
+.gridItem:hover {
+  color: #5c9335;
+  background-color: white;
+  cursor: pointer;
+}
