@@ -7,7 +7,7 @@ export default function ToDo() {
   return (
     <>
       <Head>
-        <title>Ansaatplan - Jaklhof Logistics</title>
+        <title>To Do - Jaklhof Logistics</title>
       </Head>
       <Week />
 
