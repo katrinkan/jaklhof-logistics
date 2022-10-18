@@ -8,7 +8,6 @@ export default function Dashboard() {
   const [greeting, setGreeting] = useState("");
 
   const handleResponse = (response) => {
-    console.log(response.data.user.email);
     setGreeting(response.data.user.email);
   };
 

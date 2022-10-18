@@ -47,7 +47,7 @@ export default function Login() {
         <input
           type="password"
           name="password"
-          placeholder="Wähle ein Passwort"
+          placeholder="Passwort"
           className={styles.formContent}
           value={password}
           onChange={(event) => setPassword(event.target.value)}
