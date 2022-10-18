@@ -2,7 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import jaklhofSonne from "../public/jaklhof-sonne.png";
 import { supabase } from "../utils/supabaseClient";
-import styles from "../styles/Login.module.css";
+import styles from "../styles/Profile.module.css";
 import { useState, useEffect } from "react";
 
 export default function Profile({ session }) {
@@ -69,6 +69,7 @@ export default function Profile({ session }) {
       setLoading(false);
     }
   }
+
   return (
     <div>
       <Head>
@@ -92,16 +93,19 @@ export default function Profile({ session }) {
           }}
         />
         <br />
+        <button
+          type="submit"
+          className="btn"
+          onClick={() => {
+            updateProfile({ username });
+            setUsername("");
+          }}
+          disabled={loading}
+        >
+          {loading ? "Loading..." : "Änderung speichern"}
+        </button>
       </form>
-      <button
-        className="btn"
-        onClick={() => {
-          updateProfile({ username });
-        }}
-        disabled={loading}
-      >
-        {loading ? "Loading..." : "Änderung speichern"}
-      </button>
+
       <div className={styles.logo}>
         <Image src={jaklhofSonne} width={90} height={90} />
       </div>

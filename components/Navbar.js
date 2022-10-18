@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { supabase } from "../utils/supabaseClient";
 import jaklhofLogo from "../public/jaklhof-logo.png";
@@ -9,9 +10,11 @@ const MenuList = [
   { text: "To Do", href: "/todo" },
   { text: "Lagerbestand", href: "/lagerbestand" },
   { text: "Großbestellung", href: "/grossbestellung" },
+  { text: "Profil", href: "/profile" },
 ];
 
 export default function Navbar() {
+  const router = useRouter();
   const [navActive, setNavActive] = useState(null);
   const [activeIdx, setActiveIdx] = useState(-1);
 
@@ -40,7 +43,13 @@ export default function Navbar() {
               <NavItem active={activeIdx === idx} {...menu} />
             </div>
           ))}
-          <button className="logOutBtn" onClick={() => supabase.auth.signOut()}>
+          <button
+            className="logOutBtn"
+            onClick={() => {
+              supabase.auth.signOut();
+              router.push("/login");
+            }}
+          >
             Log out
           </button>
         </div>

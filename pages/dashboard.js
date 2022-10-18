@@ -5,28 +5,16 @@ import styles from "../styles/Dashboard.module.css";
 import { supabase } from "../utils/supabaseClient";
 
 export default function Dashboard() {
-  const [greeting, setGreeting] = useState("");
-
-  const handleResponse = (response) => {
-    setGreeting(response.data.user.email);
-  };
-
-  const getUser = () => {
-    supabase.auth.getUser().then(handleResponse);
-  };
-
-  getUser();
-
   return (
-    <div className>
+    <div>
       <Head>
         <title>Dashboard - Jaklhof Logistics</title>
       </Head>
-      <h1>Hallo, {greeting}!</h1>
+      <h1>Hallo!</h1>
       <div className={styles.grid}>
         <div className={styles.gridItem}>
           <Link href="/todo">
-            <h2>Ansaatplan</h2>
+            <h2>To Do</h2>
           </Link>
         </div>
         <div className={styles.gridItem}>
@@ -35,7 +23,9 @@ export default function Dashboard() {
           </Link>
         </div>
         <div className={styles.gridItem}>
-          <h2>Lagerbestand</h2>
+          <Link href="/lagerbestand">
+            <h2>Lagerbestand</h2>
+          </Link>
         </div>
         <div className={styles.gridItem}>
           <Link href="/ansaatplan">
@@ -43,7 +33,9 @@ export default function Dashboard() {
           </Link>
         </div>
         <div className={styles.gridItem}>
-          <h2>Großbestellung</h2>
+          <Link href="/grossbestellung">
+            <h2>Großbestellung</h2>
+          </Link>
         </div>
       </div>
     </div>
