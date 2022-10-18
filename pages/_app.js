@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
-  if (router.asPath === "/login") {
+  if (router.asPath === "/login" || router.asPath === "/signup") {
     return <Component {...pageProps} />;
   }
   return (

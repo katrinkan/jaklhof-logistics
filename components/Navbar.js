@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
+import { supabase } from "../utils/supabaseClient";
 import jaklhofLogo from "../public/jaklhof-logo.png";
-import jaklhofSonne from "../public/jaklhof-sonne.png";
 import NavItem from "./NavItem";
 
 const MenuList = [
@@ -40,7 +40,9 @@ export default function Navbar() {
               <NavItem active={activeIdx === idx} {...menu} />
             </div>
           ))}
-          <button className="logOutBtn">Log out</button>
+          <button className="logOutBtn" onClick={() => supabase.auth.signOut()}>
+            Log out
+          </button>
         </div>
       </nav>
     </header>

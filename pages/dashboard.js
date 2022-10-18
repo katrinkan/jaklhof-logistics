@@ -1,13 +1,29 @@
 import Head from "next/head";
 import Link from "next/link";
+import { useState } from "react";
 import styles from "../styles/Dashboard.module.css";
+import { supabase } from "../utils/supabaseClient";
 
 export default function Dashboard() {
+  const [greeting, setGreeting] = useState("");
+
+  const handleResponse = (response) => {
+    console.log(response.data.user.email);
+    setGreeting(response.data.user.email);
+  };
+
+  const getUser = () => {
+    supabase.auth.getUser().then(handleResponse);
+  };
+
+  getUser();
+
   return (
-    <div>
+    <div className>
       <Head>
         <title>Dashboard - Jaklhof Logistics</title>
       </Head>
+      <h1>Hallo, {greeting}!</h1>
       <div className={styles.grid}>
         <div className={styles.gridItem}>
           <Link href="/todo">

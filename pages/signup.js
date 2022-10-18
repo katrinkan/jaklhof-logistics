@@ -6,18 +6,19 @@ import { useState } from "react";
 import { supabase } from "../utils/supabaseClient";
 import { useRouter } from "next/router";
 
-export default function Login() {
+export default function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
 
-  const handleLogin = async () => {
-    let { user, error } = await supabase.auth.signInWithPassword(
+  const signUp = async () => {
+    let { user, error } = await supabase.auth.signUp(
       {
         email: email,
         password: password,
       },
-      router.push("/dashboard")
+      alert("Bitte bestätige die von uns erhaltene Email"),
+      router.push("/login")
     );
     error ? console.log(error) : console.log(user);
   };
@@ -25,9 +26,9 @@ export default function Login() {
   return (
     <div>
       <Head>
-        <title>Login - Jaklhof Logistics</title>
+        <title>SignUp - Jaklhof Logistics</title>
       </Head>
-      <h1 className={styles.heading}>Login</h1>
+      <h1 className={styles.heading}>Sign Up</h1>
       <form className={styles.loginForm}>
         <label htmlFor="email" className={styles.labelEmail}>
           Email
@@ -36,13 +37,16 @@ export default function Login() {
         <input
           type="email"
           name="email"
-          id="email"
           placeholder="Email"
-          required
           className={styles.formContent}
           value={email}
           onChange={(event) => setEmail(event.target.value)}
         />
+        <br />
+        <br />
+        <label htmlFor="password" className={styles.labelPassword}>
+          Password
+        </label>
         <br />
         <input
           type="password"
@@ -52,17 +56,10 @@ export default function Login() {
           value={password}
           onChange={(event) => setPassword(event.target.value)}
         />
-        <br />
-        <button
-          className="btn"
-          onClick={(event) => {
-            event.preventDefault();
-            handleLogin(email);
-          }}
-        >
-          Log in
-        </button>
       </form>
+      <button className="btn" onClick={signUp}>
+        Sign Up
+      </button>
       <div className={styles.logo}>
         <Image src={jaklhofSonne} width={90} height={90} />
       </div>
