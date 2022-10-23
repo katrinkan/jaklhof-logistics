@@ -63,6 +63,10 @@ nav {
 .container {
   margin: 50px 20px 20px 20px;
 }
+.container_login {
+  max-width: 50%;
+  margin: 100px auto;
+}
 h1 {
   text-align: center;
   padding-top: 30px;
@@ -112,6 +116,16 @@ a {
   cursor: pointer;
   background-color: white;
   color: #5c9335;
+}
+.logo {
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+}
+.label {
+  padding-right: 160px;
+  font-size: 20px;
+  font-family: "Roboto", sans-serif;
 }
 @media screen and (min-width: 768px) {
   .nav__menuBar {

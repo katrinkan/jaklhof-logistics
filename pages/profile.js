@@ -36,7 +36,8 @@ export default function Profile({ session }) {
         setUsername(data.username);
       }
     } catch (error) {
-      alert(error.message);
+      alert("Error loading user data!");
+      console.log(error);
     } finally {
       setLoading(false);
     }
@@ -54,9 +55,11 @@ export default function Profile({ session }) {
       let { error } = await supabase.from("profiles").upsert(updates);
       if (error) {
         throw error;
+        alert("Profile updated!");
       }
     } catch (error) {
-      alert(error.message);
+      alert("Error updating the data!");
+      console.log(error);
     } finally {
       setLoading(false);
     }
@@ -86,7 +89,6 @@ export default function Profile({ session }) {
         />
         <br />
         <button
-          type="submit"
           className="btn"
           onClick={() => {
             updateProfile({ username });

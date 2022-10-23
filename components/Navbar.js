@@ -47,7 +47,7 @@ export default function Navbar() {
             className="logOutBtn"
             onClick={() => {
               supabase.auth.signOut();
-              router.push("/login");
+              router.push("/");
             }}
           >
             Log out
