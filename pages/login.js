@@ -44,9 +44,13 @@ export default function Login() {
           onChange={(event) => setEmail(event.target.value)}
         />
         <br />
+        <label htmlFor="password" className={styles.labelPassword}>
+          Passwort
+        </label>
+        <br />
         <input
           type="password"
-          name="password"
+          id="password"
           placeholder="Passwort"
           className={styles.formContent}
           value={password}

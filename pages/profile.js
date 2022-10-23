@@ -1,36 +1,28 @@
 import Head from "next/head";
 import Image from "next/image";
 import jaklhofSonne from "../public/jaklhof-sonne.png";
-import { supabase } from "../utils/supabaseClient";
 import styles from "../styles/Profile.module.css";
 import { useState, useEffect } from "react";
+import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
+import { supabase } from "../utils/supabaseClient";
+import { useRouter } from "next/router";
+import Navbar from "../components/Navbar";
 
 export default function Profile({ session }) {
+  const router = useRouter();
+  const supabase = useSupabaseClient();
+  const user = useUser();
   const [loading, setLoading] = useState(true);
   const [username, setUsername] = useState(null);
+
   useEffect(() => {
     getProfile();
   }, [session]);
 
-  async function getCurrentUser() {
-    const {
-      data: { session },
-      error,
-    } = await supabase.auth.getSession();
-
-    if (error) {
-      throw error;
-    }
-    if (!session?.user) {
-      throw new Error("User not logged in");
-    }
-    return session.user;
-  }
-
   async function getProfile() {
     try {
       setLoading(true);
-      const user = await getCurrentUser();
+
       let { data, error, status } = await supabase
         .from("profiles")
         .select(`username`)
@@ -53,11 +45,11 @@ export default function Profile({ session }) {
   async function updateProfile({ username }) {
     try {
       setLoading(true);
-      const user = await getCurrentUser();
+
       const updates = {
         id: user.id,
         username,
-        updated_at: new Date(),
+        updated_at: new Date().toISOString(),
       };
       let { error } = await supabase.from("profiles").upsert(updates);
       if (error) {
@@ -75,6 +67,7 @@ export default function Profile({ session }) {
       <Head>
         <title>Profil bearbeiten - Jaklhof Logistics</title>
       </Head>
+      <Navbar />
       <h1 className={styles.heading}>Profil bearbeiten</h1>
       <form className={styles.loginForm}>
         <label htmlFor="username" className={styles.labelEmail}>
@@ -89,7 +82,6 @@ export default function Profile({ session }) {
           value={username || ""}
           onChange={(event) => {
             setUsername(event.target.value);
-            console.log(event.target.value);
           }}
         />
         <br />
@@ -103,6 +95,15 @@ export default function Profile({ session }) {
           disabled={loading}
         >
           {loading ? "Loading..." : "Änderung speichern"}
+        </button>
+        <button
+          className="btn"
+          onClick={() => {
+            supabase.auth.signOut();
+            router.push("/");
+          }}
+        >
+          Log Out
         </button>
       </form>
 

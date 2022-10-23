@@ -1,16 +1,21 @@
 import Layout from "../components/Layout";
 import "../styles/globals.css";
 import { useRouter } from "next/router";
+import { createBrowserSupabaseClient } from "@supabase/auth-helpers-nextjs";
+import { SessionContextProvider } from "@supabase/auth-helpers-react";
+import { useState } from "react";
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
-  if (router.asPath === "/login" || router.asPath === "/signup") {
-    return <Component {...pageProps} />;
-  }
+  const [supabaseClient] = useState(() => createBrowserSupabaseClient());
+
   return (
-    <Layout>
+    <SessionContextProvider
+      supabaseClient={supabaseClient}
+      initialSession={pageProps.initialSession}
+    >
       <Component {...pageProps} />
-    </Layout>
+    </SessionContextProvider>
   );
 }
 
