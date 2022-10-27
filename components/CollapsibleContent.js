@@ -1,4 +1,5 @@
 import styles from "./CollapsibleContent.module.css";
+import UpdateToDo from "./UpdateToDo";
 
 export default function CollapsibleContent(props) {
   return (
@@ -29,19 +30,7 @@ export default function CollapsibleContent(props) {
           <h5 className={styles.description}>{props.ansaatplan.usage}</h5>
         </div>
       </div>
-      <form className={styles.form}>
-        <label htmlFor="amountPots">Anzahl ändern</label>
-        <input
-          type="number"
-          name="amountPots"
-          id="amountPots"
-          min="0"
-          max="100"
-          defaultValue={props.ansaatplan.amount}
-          className={styles.input}
-        />
-      </form>
-      <button className="btn">Ich mach's!</button>
+      <UpdateToDo ansaatplan={props.ansaatplan} />
     </>
   );
 }

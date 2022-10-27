@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useRef } from "react";
 import styles from "./Collapsible.module.css";
 
 export default function Collapsible(props) {
