@@ -1,4 +1,3 @@
-import Week from "../components/Week";
 import Head from "next/head";
 import Collapsible from "../components/Collapsible";
 import styles from "../styles/Todo.module.css";
@@ -12,9 +11,13 @@ export default function ToDo() {
   const startDate = new Date(currentDate.getFullYear(), 0, 1);
   const days = Math.floor((currentDate - startDate) / (24 * 60 * 60 * 1000));
   const weekNumber = Math.ceil(days / 7);
-
+  const [week, setWeek] = useState(weekNumber);
   const [fetchError, setFetchError] = useState(null);
   const [ansaatplan, setAnsaatplan] = useState(null);
+
+  const handleChange = (event) => {
+    setWeek(event.target.value);
+  };
 
   useEffect(() => {
     const fetchAnsaatplan = async () => {
@@ -40,7 +43,24 @@ export default function ToDo() {
       </Head>
       <Navbar />
       <div className="container">
-        <Week weekNumber={weekNumber} />
+        <div className={styles.container}>
+          <h2 className={styles.heading}>Woche {week}</h2>
+          <form className={styles.form}>
+            <label htmlFor="week" className={styles.label}>
+              Woche ändern
+            </label>
+            <input
+              type="number"
+              name="week"
+              id="week"
+              min="1"
+              max="52"
+              onChange={handleChange}
+              defaultValue={weekNumber}
+              className={styles.input}
+            />
+          </form>
+        </div>
         {fetchError && <p>{fetchError}</p>}
         {ansaatplan && (
           <div className="ansaatplan">
@@ -50,9 +70,9 @@ export default function ToDo() {
                 category={ansaatplan.category}
                 key={ansaatplan.id}
                 ansaatplan={ansaatplan}
-                week={weekNumber}
+                week={week}
               >
-                <CollapsibleContent ansaatplan={ansaatplan} week={weekNumber} />
+                <CollapsibleContent ansaatplan={ansaatplan} week={week} />
               </Collapsible>
             ))}
           </div>
