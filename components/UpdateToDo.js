@@ -27,7 +27,6 @@ export default function UpdateToDo(props) {
     }
     if (data) {
       console.log(data);
-      window.location.reload();
     }
   };
 
@@ -49,7 +48,6 @@ export default function UpdateToDo(props) {
       }
       if (data) {
         setUsername(data.username);
-        console.log(data.username);
       }
     } catch (error) {
       alert(error.message);

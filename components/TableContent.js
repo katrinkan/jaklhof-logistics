@@ -3,14 +3,12 @@ import styles from "./TableContent.module.css";
 export default function TableContent(props) {
   const week = props.week;
   const ansaatWeek = props.ansaatplan.week;
-  console.log(week);
 
   if (week === ansaatWeek) {
     return (
       <form className={styles.form}>
         <div className={styles.grid}>
           <div className={styles.grid_item}>
-            <label htmlFor="week">Woche</label>
             <input
               className={styles.input}
               type="number"
@@ -21,7 +19,6 @@ export default function TableContent(props) {
             />
           </div>
           <div className={styles.grid_item}>
-            <label htmlFor="title">Titel</label>
             <input
               className={styles.input}
               type="text"
@@ -30,7 +27,6 @@ export default function TableContent(props) {
             />
           </div>
           <div className={styles.grid_item}>
-            <label htmlFor="amount">Anzahl</label>
             <input
               className={styles.input}
               type="number"
@@ -41,7 +37,6 @@ export default function TableContent(props) {
             />
           </div>
           <div className={styles.grid_item}>
-            <label htmlFor="unit">Einheit</label>
             <input
               className={styles.input}
               type="text"
@@ -50,7 +45,6 @@ export default function TableContent(props) {
             />
           </div>
           <div className={styles.grid_item}>
-            <label htmlFor="variety">Sorte</label>
             <input
               className={styles.input}
               type="text"
@@ -59,7 +53,6 @@ export default function TableContent(props) {
             />
           </div>
           <div className={styles.grid_item}>
-            <label htmlFor="tray_type">Plattentyp</label>
             <input
               className={styles.input}
               type="text"
@@ -68,7 +61,6 @@ export default function TableContent(props) {
             />
           </div>
           <div className={styles.grid_item}>
-            <label htmlFor="soil">Substrat</label>
             <input
               className={styles.input}
               type="text"
@@ -77,7 +69,6 @@ export default function TableContent(props) {
             />
           </div>
           <div className={styles.grid_item}>
-            <label htmlFor="use">Verwendung</label>
             <input
               className={styles.input}
               type="text"

@@ -9,7 +9,7 @@ export default function Ansaatplan(props) {
   const [weekSelect, setWeekSelect] = useState(props.week);
   const [fetchError, setFetchError] = useState(null);
   const [ansaatplan, setAnsaatplan] = useState(null);
-  console.log(weekSelect);
+
   const handleChange = (event) => {
     setWeekSelect(event.target.value);
   };
@@ -57,13 +57,13 @@ export default function Ansaatplan(props) {
         </div>
         {fetchError && <p>{fetchError}</p>}
         {ansaatplan && (
-          <div className="ansaatplan">
+          <>
             <TableAnsaatplan
               key={ansaatplan.id}
               ansaatplan={ansaatplan}
               week={weekSelect}
             ></TableAnsaatplan>
-          </div>
+          </>
         )}
       </div>
     </>
