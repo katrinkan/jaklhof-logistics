@@ -2,7 +2,6 @@ import Head from "next/head";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import jaklhofSonne from "../public/jaklhof-sonne.png";
-import { supabase } from "../utils/supabaseClient";
 import { Auth } from "@supabase/auth-ui-react";
 import {
   useSession,

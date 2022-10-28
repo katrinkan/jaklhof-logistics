@@ -6,12 +6,8 @@ import { useEffect, useState } from "react";
 import { supabase } from "../utils/supabaseClient";
 import CollapsibleContent from "../components/CollapsibleContent";
 
-export default function ToDo() {
-  const currentDate = new Date();
-  const startDate = new Date(currentDate.getFullYear(), 0, 1);
-  const days = Math.floor((currentDate - startDate) / (24 * 60 * 60 * 1000));
-  const weekNumber = Math.ceil(days / 7);
-  const [week, setWeek] = useState(weekNumber);
+export default function ToDo(props) {
+  const [week, setWeek] = useState(props.week);
   const [fetchError, setFetchError] = useState(null);
   const [ansaatplan, setAnsaatplan] = useState(null);
 
@@ -56,7 +52,7 @@ export default function ToDo() {
               min="1"
               max="52"
               onChange={handleChange}
-              defaultValue={weekNumber}
+              defaultValue={props.week}
               className={styles.input}
             />
           </form>

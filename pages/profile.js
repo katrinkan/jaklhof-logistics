@@ -4,7 +4,6 @@ import jaklhofSonne from "../public/jaklhof-sonne.png";
 import styles from "../styles/Profile.module.css";
 import { useState, useEffect } from "react";
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
-import { supabase } from "../utils/supabaseClient";
 import { useRouter } from "next/router";
 import Navbar from "../components/Navbar";
 

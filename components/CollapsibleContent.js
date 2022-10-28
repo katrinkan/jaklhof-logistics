@@ -27,7 +27,7 @@ export default function CollapsibleContent(props) {
         </div>
         <div className={styles.gridItem}>
           <h6>Verwendung</h6>
-          <h5 className={styles.description}>{props.ansaatplan.usage}</h5>
+          <h5 className={styles.description}>{props.ansaatplan.use}</h5>
         </div>
       </div>
       <UpdateToDo ansaatplan={props.ansaatplan} />

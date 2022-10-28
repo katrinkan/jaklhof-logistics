@@ -1,1 +1,18 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
+.form {
+  padding: 20px 0;
+}
+.label {
+  padding-right: 10px;
+  font-size: 20px;
+}
+.input {
+  padding: 5px;
+  font-size: 20px;
+  text-align: center;
+}

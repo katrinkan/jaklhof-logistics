@@ -8,13 +8,17 @@ import { useState } from "react";
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
   const [supabaseClient] = useState(() => createBrowserSupabaseClient());
+  const currentDate = new Date();
+  const startDate = new Date(currentDate.getFullYear(), 0, 1);
+  const days = Math.floor((currentDate - startDate) / (24 * 60 * 60 * 1000));
+  const weekNumber = Math.ceil(days / 7);
 
   return (
     <SessionContextProvider
       supabaseClient={supabaseClient}
       initialSession={pageProps.initialSession}
     >
-      <Component {...pageProps} />
+      <Component {...pageProps} week={weekNumber} />
     </SessionContextProvider>
   );
 }
