@@ -1,3 +1,4 @@
+import DeleteRow from "./DeleteRow";
 import styles from "./TableContent.module.css";
 
 export default function TableContent(props) {
@@ -80,7 +81,10 @@ export default function TableContent(props) {
             <div className={styles.input_btn}>
               <input type="submit" id="save" value="Speichern" />
 
-              <input type="submit" id="delete" value="Löschen" />
+              <DeleteRow
+                ansaatplan={props.ansaatplan}
+                onDelete={props.onDelete}
+              />
             </div>
           </div>
         </div>

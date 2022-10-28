@@ -10,9 +10,16 @@ export default function Ansaatplan(props) {
   const [fetchError, setFetchError] = useState(null);
   const [ansaatplan, setAnsaatplan] = useState(null);
 
+  const handleDelete = (id) => {
+    setAnsaatplan((prevAnsaatplan) => {
+      return prevAnsaatplan.filter((ansaatplan) => ansaatplan.id !== id);
+    });
+  };
+
   const handleChange = (event) => {
     setWeekSelect(event.target.value);
   };
+
   useEffect(() => {
     const fetchAnsaatplan = async () => {
       const { data, error } = await supabase.from("ansaatplan").select();
@@ -50,7 +57,7 @@ export default function Ansaatplan(props) {
               min="1"
               max="52"
               onChange={handleChange}
-              defaultValue={props.week}
+              defaultValue={weekSelect}
               className={styles.input}
             />
           </form>
@@ -62,6 +69,7 @@ export default function Ansaatplan(props) {
               key={ansaatplan.id}
               ansaatplan={ansaatplan}
               week={weekSelect}
+              onDelete={handleDelete}
             ></TableAnsaatplan>
           </>
         )}

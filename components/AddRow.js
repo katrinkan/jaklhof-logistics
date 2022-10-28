@@ -1,8 +1,9 @@
+import { SERVER_PROPS_ID } from "next/dist/shared/lib/constants";
 import { useState } from "react";
 import { supabase } from "../utils/supabaseClient";
 import styles from "./TableContent.module.css";
 
-export default function AddRow({ onInsert }) {
+export default function AddRow() {
   const [week, setWeek] = useState("");
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
@@ -15,7 +16,6 @@ export default function AddRow({ onInsert }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     if (
       !week ||
       !title ||
@@ -23,7 +23,7 @@ export default function AddRow({ onInsert }) {
       !unit ||
       !variety ||
       !tray_type ||
-      !soil ||
+      !soil_type ||
       !use
     ) {
       setFormError("Bitte vollständig ausfüllen!");

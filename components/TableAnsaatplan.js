@@ -14,6 +14,7 @@ export default function TableAnsaatplan(props) {
               week={week}
               key={ansaatplan.id}
               ansaatplan={ansaatplan}
+              onDelete={props.handleDelete}
             />
           ))}
         </div>
