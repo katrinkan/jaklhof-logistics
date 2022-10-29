@@ -1,0 +1,8 @@
+.order_card {
+  background-color: #f1f1f1;
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  border-radius: 8px;
+  position: relative;
+}

@@ -38,6 +38,11 @@ export default function Dashboard(props) {
               <h2>Großbestellung</h2>
             </Link>
           </div>
+          <div className={styles.gridItem}>
+            <Link href="/ordermanagement">
+              <h2>Manage Großbestellung</h2>
+            </Link>
+          </div>
         </div>
       </div>
     </div>
