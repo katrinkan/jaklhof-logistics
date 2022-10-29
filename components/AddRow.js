@@ -1,4 +1,3 @@
-import { SERVER_PROPS_ID } from "next/dist/shared/lib/constants";
 import { useState } from "react";
 import { supabase } from "../utils/supabaseClient";
 import styles from "./TableContent.module.css";
@@ -42,7 +41,6 @@ export default function AddRow() {
       setFormError("Bitte vollständig ausfüllen!");
     }
     if (data) {
-      console.log(data);
       setFormError(null);
     }
   };
