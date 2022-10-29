@@ -22,7 +22,10 @@ export default function Ansaatplan(props) {
 
   useEffect(() => {
     const fetchAnsaatplan = async () => {
-      const { data, error } = await supabase.from("ansaatplan").select();
+      const { data, error } = await supabase
+        .from("ansaatplan")
+        .select()
+        .order("created_at", { ascending: false });
 
       if (error) {
         setFetchError("Could not fetch Ansaatplan");
