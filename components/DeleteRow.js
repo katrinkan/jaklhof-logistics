@@ -12,7 +12,6 @@ export default function DeleteRow({ ansaatplan, onDelete }) {
       console.log(error);
     }
     if (data) {
-      console.log(data);
       onDelete(ansaatplan.id);
     }
   };

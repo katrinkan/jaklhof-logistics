@@ -6,3 +6,27 @@
   border-radius: 8px;
   position: relative;
 }
+.buttons {
+  text-align: center;
+}
+.btn {
+  margin: 10px;
+  padding: 10px 10px;
+  background-color: #5c9335;
+  box-shadow: none;
+  color: white;
+  border: 1px solid #5c9335;
+  border-radius: 8px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.btn:hover {
+  cursor: pointer;
+  background-color: white;
+  color: #5c9335;
+}
+.btn:disabled {
+  background-color: #f1f1f1;
+  color: #5c9335;
+  cursor: default;
+}

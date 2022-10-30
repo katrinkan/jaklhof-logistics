@@ -9,6 +9,12 @@ export default function Ordermanagement() {
   const [fetchError, setFetchError] = useState(null);
   const [orders, setOrders] = useState(null);
 
+  const handleDelete = (id) => {
+    setOrders((prevOrders) => {
+      return prevOrders.filter((orders) => orders.id !== id);
+    });
+  };
+
   useEffect(() => {
     const fetchOrders = async () => {
       const { data, error } = await supabase
@@ -40,7 +46,7 @@ export default function Ordermanagement() {
         <div className="container">
           <div className={styles.grid}>
             {orders.map((order) => (
-              <OrderCard key={order.id} order={order} />
+              <OrderCard key={order.id} order={order} onDelete={handleDelete} />
             ))}
           </div>
         </div>

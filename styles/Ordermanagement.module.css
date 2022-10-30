@@ -4,3 +4,9 @@
   gap: 40px;
   margin-top: 40px;
 }
+
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

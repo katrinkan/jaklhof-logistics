@@ -3,9 +3,27 @@ import { useEffect, useState } from "react";
 import { supabase } from "../utils/supabaseClient";
 import styles from "./OrderCard.module.css";
 
-export default function OrderCard({ order }) {
+export default function OrderCard({ order, onDelete }) {
   const [username, setUsername] = useState(null);
+  const [disabled, setDisabled] = useState(false);
   const session = useSession();
+
+  const handleDelete = async (event) => {
+    event.preventDefault();
+
+    const { data, error } = await supabase
+      .from("orders")
+      .delete()
+      .eq("id", order.id)
+      .select();
+
+    if (error) {
+      console.log(error);
+    }
+    if (data) {
+      onDelete(order.id);
+    }
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -20,7 +38,7 @@ export default function OrderCard({ order }) {
       console.log(error);
     }
     if (data) {
-      console.log(data);
+      setDisabled(true);
     }
   };
   const user = useUser();
@@ -51,9 +69,18 @@ export default function OrderCard({ order }) {
       <h3>{order.name}</h3>
       <p>{order.order}</p>
       <h4>{order.pickup_date}</h4>
-      <button className="btn" onClick={handleSubmit}>
-        Bestellt
-      </button>
+      <div className={styles.buttons}>
+        <button
+          className={styles.btn}
+          onClick={handleSubmit}
+          disabled={disabled}
+        >
+          Bestellt
+        </button>
+        <button className={styles.btn} onClick={handleDelete}>
+          Erledigt
+        </button>
+      </div>
     </div>
   );
 }
