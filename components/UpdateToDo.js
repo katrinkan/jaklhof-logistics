@@ -64,10 +64,17 @@ export default function UpdateToDo(props) {
       }
       if (data) {
         setAmount(data.amount);
+        if (props.ansaatplan.done_by === null) {
+          setDisabled(false);
+        }
+        if (props.ansaatplan.done_by !== null) {
+          setDisabled(true);
+        }
       }
     };
     fetchAnsaatplan();
   }, []);
+
   return (
     <>
       <form className={styles.form} onChange={handleChange}>

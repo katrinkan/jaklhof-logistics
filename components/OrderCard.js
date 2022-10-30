@@ -30,7 +30,7 @@ export default function OrderCard({ order, onDelete }) {
 
     const { data, error } = await supabase
       .from("orders")
-      .update({ done: username })
+      .update({ done_by: username })
       .eq("id", order.id)
       .select();
 
