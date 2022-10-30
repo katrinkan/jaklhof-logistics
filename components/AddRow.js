@@ -11,6 +11,7 @@ export default function AddRow() {
   const [tray_type, setTray_type] = useState("");
   const [soil_type, setSoil_type] = useState("");
   const [use, setUse] = useState("");
+  const [category, setCategory] = useState("");
   const [formError, setFormError] = useState(null);
 
   const handleSubmit = async (event) => {
@@ -23,7 +24,8 @@ export default function AddRow() {
       !variety ||
       !tray_type ||
       !soil_type ||
-      !use
+      !use ||
+      !category
     ) {
       setFormError("Bitte vollständig ausfüllen!");
       return;
@@ -32,7 +34,17 @@ export default function AddRow() {
     const { data, error } = await supabase
       .from("ansaatplan")
       .insert([
-        { week, title, amount, unit, variety, tray_type, soil_type, use },
+        {
+          week,
+          title,
+          amount,
+          unit,
+          variety,
+          tray_type,
+          soil_type,
+          use,
+          category,
+        },
       ])
       .select();
 
@@ -146,6 +158,18 @@ export default function AddRow() {
             id="use"
             value={use}
             onChange={(event) => setUse(event.target.value)}
+          />
+        </div>
+        <div className={styles.grid_item}>
+          <label className={styles.label} htmlFor="category">
+            Kategorie
+          </label>
+          <input
+            className={styles.input}
+            type="text"
+            id="category"
+            value={category}
+            onChange={(event) => setCategory(event.target.value)}
           />
         </div>
         <div className={styles.grid_item}>

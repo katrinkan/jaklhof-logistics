@@ -122,6 +122,15 @@ export default function TableContent(props) {
             />
           </div>
           <div className={styles.grid_item}>
+            <input
+              className={styles.input}
+              type="text"
+              id="category"
+              defaultValue={category}
+              onChange={(event) => setCategory(event.target.value)}
+            />
+          </div>
+          <div className={styles.grid_item}>
             <div className={styles.input_btn}>
               <input
                 type="submit"
