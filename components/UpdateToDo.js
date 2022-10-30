@@ -7,6 +7,7 @@ import styles from "./UpdateToDo.module.css";
 export default function UpdateToDo(props) {
   const [amount, setAmount] = useState(props.ansaatplan.amount);
   const [username, setUsername] = useState(null);
+  const [disabled, setDisabled] = useState(false);
   const session = useSession();
   const supabase = useSupabaseClient();
 
@@ -15,7 +16,7 @@ export default function UpdateToDo(props) {
   };
 
   const handleSubmit = async (event) => {
-    event.preventDefault;
+    event.preventDefault();
     const { data, error } = await supabase
       .from("ansaatplan")
       .update({ amount: amount, done_by: username })
@@ -26,7 +27,7 @@ export default function UpdateToDo(props) {
       console.log(error);
     }
     if (data) {
-      console.log(data);
+      setDisabled(true);
     }
   };
 
@@ -81,7 +82,12 @@ export default function UpdateToDo(props) {
           className={styles.input}
         />
       </form>
-      <button className="btn" type="submit" onClick={handleSubmit}>
+      <button
+        className={styles.btn}
+        type="submit"
+        onClick={handleSubmit}
+        disabled={disabled}
+      >
         Ich mach's!
       </button>
     </>
