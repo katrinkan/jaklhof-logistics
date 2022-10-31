@@ -1,9 +1,32 @@
 import Head from "next/head";
+import { useState } from "react";
+
 import AddProduct from "../components/AddProduct";
 import Navbar from "../components/Navbar";
+import TableLagerbestand from "../components/TableLagerbestand";
+import useFetchLagerbestand from "../helpers/useFetchLagerbestand";
 import styles from "../styles/Lagerbestand.module.css";
+import { supabase } from "../utils/supabaseClient";
 
 export default function Lagerbestand() {
+  const { lagerbestand, fetchError } = useFetchLagerbestand();
+  const [category, setCategory] = useState(null);
+
+  const handleCategoryChange = async (event) => {
+    event.preventDefault();
+    const { data, error } = await supabase
+      .from("lagerbestand")
+      .select()
+      .filter("category", "eq", event.target.value);
+    if (error) {
+      console.log(error);
+    }
+    if (data) {
+      console.log(data);
+      setCategory(data);
+    }
+  };
+
   return (
     <>
       <Head>
@@ -11,66 +34,36 @@ export default function Lagerbestand() {
       </Head>
       <Navbar />
       <div className="container">
-        <button className={styles.btn}>Getreide</button>
-        <button className={styles.btn}>Nudeln</button>
-        <button className={styles.btn}>Öl</button>
-
-        <form className={styles.form}>
-          <div className={styles.grid}>
-            <div className={styles.grid_item}>
-              <label className={styles.label} htmlFor="action">
-                To Do
-              </label>
-              <input
-                className={styles.input}
-                type="text"
-                id="action"
-                disabled="true"
-              />
-            </div>
-            <div className={styles.grid_item}>
-              <label className={styles.label} htmlFor="title">
-                Titel
-              </label>
-              <input
-                className={styles.input}
-                type="text"
-                id="title"
-                disabled="true"
-              />
-            </div>
-            <div className={styles.grid_item}>
-              <label className={styles.label} htmlFor="stock">
-                Aktuell verfügbar
-              </label>
-              <input
-                className={styles.input}
-                type="number"
-                id="stock"
-                disabled="true"
-              />
-            </div>
-            <div className={styles.grid_item}>
-              <label className={styles.label} htmlFor="add">
-                Hinzufügen
-              </label>
-              <input className={styles.input} type="text" id="add" />
-            </div>
-            <div className={styles.grid_item}>
-              <label className={styles.label} htmlFor="remove">
-                Entnehmen
-              </label>
-              <input className={styles.input} type="text" id="remove" />
-            </div>
-
-            <div className={styles.grid_item}>
-              <div className={styles.input_btn}>
-                <input type="submit" id="save" value="Speichern" />
-                <input type="submit" id="delete" value="Löschen" />
-              </div>
-            </div>
+        <button
+          className={styles.btn}
+          value="Getreide"
+          onClick={handleCategoryChange}
+        >
+          Getreide
+        </button>
+        <button
+          className={styles.btn}
+          value="Nudeln"
+          onClick={handleCategoryChange}
+        >
+          Nudeln
+        </button>
+        <button
+          className={styles.btn}
+          value="Öl"
+          onClick={handleCategoryChange}
+        >
+          Öl
+        </button>
+        <button className={styles.btn}>Neues Produkt</button>
+        {fetchError && <p>{fetchError}</p>}
+        {category && (
+          <div className="container">
+            {category.map((category) => (
+              <TableLagerbestand key={category.id} lagerbestand={category} />
+            ))}
           </div>
-        </form>
+        )}
         <AddProduct />
       </div>
     </>
