@@ -11,7 +11,13 @@ import { supabase } from "../utils/supabaseClient";
 export default function Lagerbestand() {
   const { lagerbestand, fetchError } = useFetchLagerbestand();
   const [category, setCategory] = useState(null);
+  const [stock, setStock] = useState(lagerbestand);
 
+  const handleDelete = (id) => {
+    setStock((prevStock) => {
+      return prevStock.filter((stock) => stock.id !== id);
+    });
+  };
   const handleCategoryChange = async (event) => {
     event.preventDefault();
     const { data, error } = await supabase
@@ -22,7 +28,6 @@ export default function Lagerbestand() {
       console.log(error);
     }
     if (data) {
-      console.log(data);
       setCategory(data);
     }
   };
@@ -59,9 +64,35 @@ export default function Lagerbestand() {
         {fetchError && <p>{fetchError}</p>}
         {category && (
           <div className="container">
-            {category.map((category) => (
-              <TableLagerbestand key={category.id} lagerbestand={category} />
-            ))}
+            <form className={styles.form}>
+              <div className={styles.grid}>
+                <div className={styles.grid_item}>
+                  <h5 className={styles.heading}>To Do</h5>
+                </div>
+                <div className={styles.grid_item}>
+                  <h5 className={styles.heading}>Titel</h5>
+                </div>
+                <div className={styles.grid_item}>
+                  <h5 className={styles.heading}>Aktuell verfügbar</h5>
+                </div>
+                <div className={styles.grid_item}>
+                  <h5 className={styles.heading}>Hinzufügen</h5>
+                </div>
+                <div className={styles.grid_item}>
+                  <h5 className={styles.heading}>Entnehmen</h5>
+                </div>
+                <div className={styles.grid_item}>
+                  <h5 className={styles.heading}></h5>
+                </div>
+                {category.map((category) => (
+                  <TableLagerbestand
+                    key={category.id}
+                    lagerbestand={category}
+                    onDelete={handleDelete}
+                  />
+                ))}
+              </div>
+            </form>
           </div>
         )}
         <AddProduct />

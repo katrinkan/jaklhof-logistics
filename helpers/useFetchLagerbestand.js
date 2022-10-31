@@ -7,7 +7,10 @@ export default function useFetchLagerbestand() {
 
   useEffect(() => {
     const fetchLagerbestand = async () => {
-      const { data, error } = await supabase.from("lagerbestand").select();
+      const { data, error } = await supabase
+        .from("lagerbestand")
+        .select()
+        .order("title", { ascending: true });
 
       if (error) {
         setFetchError("Could not fetch Lagerbestand");
