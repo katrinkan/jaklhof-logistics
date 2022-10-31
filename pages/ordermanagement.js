@@ -9,6 +9,8 @@ export default function Ordermanagement() {
   const [fetchError, setFetchError] = useState(null);
   const [orders, setOrders] = useState(null);
 
+  console.log(orders);
+
   const handleDelete = (id) => {
     setOrders((prevOrders) => {
       return prevOrders.filter((orders) => orders.id !== id);

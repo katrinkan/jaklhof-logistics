@@ -64,6 +64,25 @@ export default function OrderCard({ order, onDelete }) {
       console.log(error.message);
     }
   }
+  useEffect(() => {
+    const fetchOrders = async () => {
+      const { data, error } = await supabase.from("orders").select();
+
+      if (error) {
+        console.log(error);
+      }
+      if (data) {
+        if (order.done_by === null) {
+          setDisabled(false);
+        }
+        if (order.done_by !== null) {
+          setDisabled(true);
+        }
+      }
+    };
+    fetchOrders();
+  }, []);
+
   return (
     <div className={styles.order_card}>
       <h3>{order.name}</h3>
