@@ -25,5 +25,5 @@ export default function useFetchLagerbestand() {
     fetchLagerbestand();
   }, []);
 
-  return { lagerbestand, fetchError };
+  return { lagerbestand, setLagerbestand, fetchError };
 }

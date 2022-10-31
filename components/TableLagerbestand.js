@@ -31,11 +31,11 @@ export default function TableLagerbestand({ lagerbestand, onDelete }) {
       console.log(error);
     }
     if (data) {
-      console.log(data);
     }
   };
 
-  const handleDelete = async () => {
+  const handleDelete = async (event) => {
+    event.preventDefault();
     const { data, error } = await supabase
       .from("lagerbestand")
       .delete()
@@ -58,7 +58,8 @@ export default function TableLagerbestand({ lagerbestand, onDelete }) {
           className={styles.input}
           type="text"
           id="action"
-          disabled="true"
+          disabled={true}
+          defaultValue={lagerbestand.stock <= 1 ? "Bestellen" : ""}
         />
       </div>
       <div className={styles.grid_item}>
@@ -67,7 +68,7 @@ export default function TableLagerbestand({ lagerbestand, onDelete }) {
           className={styles.input}
           type="text"
           id="title"
-          disabled="true"
+          disabled={true}
           defaultValue={lagerbestand.title}
         />
       </div>
@@ -77,7 +78,7 @@ export default function TableLagerbestand({ lagerbestand, onDelete }) {
           className={styles.input}
           type="number"
           id="stock"
-          disabled="true"
+          disabled={true}
           defaultValue={lagerbestand.stock}
         />
       </div>
