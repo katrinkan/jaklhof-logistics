@@ -1,10 +1,12 @@
 import { useState } from "react";
+
 import styles from "../styles/Lagerbestand.module.css";
 import { supabase } from "../utils/supabaseClient";
 
 export default function TableLagerbestand({ lagerbestand, onDelete }) {
   const [stock, setStock] = useState(Number(lagerbestand.stock));
-  let initialStock = Number(stock);
+  const initialStock = Number(stock);
+  const id = lagerbestand.id;
 
   const handleAddition = (event) => {
     event.preventDefault();
@@ -19,18 +21,19 @@ export default function TableLagerbestand({ lagerbestand, onDelete }) {
     let newStock = initialStock - subtractedValue;
     setStock(newStock);
   };
-
-  const handleSubmit = async () => {
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     const { data, error } = await supabase
       .from("lagerbestand")
       .update({ stock: stock })
-      .eq("id", lagerbestand.id)
+      .eq("id", id)
       .select();
 
     if (error) {
       console.log(error);
     }
     if (data) {
+      console.log(data);
     }
   };
 

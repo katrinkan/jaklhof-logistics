@@ -1,12 +1,19 @@
 import { useState } from "react";
 import styles from "../styles/Lagerbestand.module.css";
 import TableLagerbestand from "../components/TableLagerbestand";
-import useFetchLagerbestand from "../helpers/useFetchLagerbestand";
+import AddProduct from "../components/AddProduct";
 import { supabase } from "../utils/supabaseClient";
+import useFetchLagerbestand from "../helpers/useFetchLagerbestand";
 
 export default function ChangeCategory() {
   const { setLagerbestand, fetchError } = useFetchLagerbestand();
   const [category, setCategory] = useState(null);
+  const [showAddProduct, setShowAddProduct] = useState(false);
+
+  const handleAddProduct = (event) => {
+    event.preventDefault();
+    setShowAddProduct((current) => !current);
+  };
 
   const handleDelete = (id) => {
     setLagerbestand((prevLagerbestand) => {
@@ -45,7 +52,11 @@ export default function ChangeCategory() {
       <button className={styles.btn} value="Öl" onClick={handleCategoryChange}>
         Öl
       </button>
-      <button className={styles.btn}>Neues Produkt</button>
+      <button className={styles.btn} onClick={handleAddProduct}>
+        Neues Produkt
+      </button>
+      {showAddProduct && <AddProduct />}
+
       {fetchError && <p>{fetchError}</p>}
       {category && (
         <div className="container">

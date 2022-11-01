@@ -1,5 +1,5 @@
 import Head from "next/head";
-import AddProduct from "../components/AddProduct";
+
 import ChangeCategory from "../components/ChangeCategory";
 import Navbar from "../components/Navbar";
 
@@ -12,7 +12,6 @@ export default function Lagerbestand() {
       <Navbar />
       <div className="container">
         <ChangeCategory />
-        <AddProduct />
       </div>
     </>
   );

@@ -1,11 +1,17 @@
 .grid {
-  max-width: 95%;
+  max-width: 97%;
   margin: 30px auto;
   display: grid;
-  grid-template-columns: repeat(4, 30% 30% 30% 10%);
+  grid-template-columns: 3fr 3fr 3fr 1fr;
   grid-gap: 10px;
   align-items: flex-end;
   margin-bottom: 10px;
+  padding-left: 10px;
+}
+
+.grid_item {
+  padding: 0;
+  margin: 0;
 }
 .label {
   font-size: 18px;
