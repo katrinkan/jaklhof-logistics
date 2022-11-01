@@ -70,7 +70,7 @@ export default function UpdateToDo(props) {
         }
         if (props.ansaatplan.done_by !== null) {
           setDisabled(true);
-          setButtonText(`${username} macht's!`);
+          setButtonText(`${props.ansaatplan.done_by} macht's!`);
         }
       }
     };
