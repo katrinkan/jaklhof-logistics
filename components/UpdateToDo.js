@@ -8,6 +8,7 @@ export default function UpdateToDo(props) {
   const [amount, setAmount] = useState(props.ansaatplan.amount);
   const [username, setUsername] = useState(null);
   const [disabled, setDisabled] = useState(false);
+  const [buttonText, setButtonText] = useState(`Ich mach's!`);
   const session = useSession();
   const supabase = useSupabaseClient();
 
@@ -69,6 +70,7 @@ export default function UpdateToDo(props) {
         }
         if (props.ansaatplan.done_by !== null) {
           setDisabled(true);
+          setButtonText(`${username} macht's!`);
         }
       }
     };
@@ -95,7 +97,7 @@ export default function UpdateToDo(props) {
         onClick={handleSubmit}
         disabled={disabled}
       >
-        Ich mach's!
+        {buttonText}
       </button>
     </>
   );

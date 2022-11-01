@@ -64,6 +64,11 @@ export default function Profile({ session }) {
     }
   }
 
+  async function signOut() {
+    const { error } = await supabase.auth.signOut();
+    router.push("/");
+  }
+
   return (
     <div>
       <Head>
@@ -97,13 +102,7 @@ export default function Profile({ session }) {
         >
           {loading ? "Loading..." : "Änderung speichern"}
         </button>
-        <button
-          className="btn"
-          onClick={() => {
-            supabase.auth.signOut();
-            router.push("/");
-          }}
-        >
+        <button className="btn" onClick={signOut}>
           Log Out
         </button>
       </form>

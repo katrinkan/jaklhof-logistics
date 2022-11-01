@@ -1,12 +1,13 @@
 import { useState } from "react";
+import useFetchLagerbestand from "../helpers/useFetchLagerbestand";
 
 import styles from "../styles/Lagerbestand.module.css";
 import { supabase } from "../utils/supabaseClient";
 
 export default function TableLagerbestand({ lagerbestand, onDelete }) {
+  const { setLagerbestand } = useFetchLagerbestand();
   const [stock, setStock] = useState(Number(lagerbestand.stock));
   const initialStock = Number(stock);
-  const id = lagerbestand.id;
 
   const handleAddition = (event) => {
     event.preventDefault();
@@ -50,6 +51,7 @@ export default function TableLagerbestand({ lagerbestand, onDelete }) {
     }
     if (data) {
       onDelete(lagerbestand.id);
+      setLagerbestand(lagerbestand.id);
     }
   };
 
