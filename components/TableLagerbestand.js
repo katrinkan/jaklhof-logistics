@@ -1,11 +1,10 @@
-import { useState } from "react";
-import useFetchLagerbestand from "../helpers/useFetchLagerbestand";
-
+import { useContext, useState } from "react";
+import { lagerbestandContext } from "../pages/lagerbestand";
 import styles from "../styles/Lagerbestand.module.css";
 import { supabase } from "../utils/supabaseClient";
 
 export default function TableLagerbestand({ lagerbestand, onDelete }) {
-  const { setLagerbestand } = useFetchLagerbestand();
+  const { setLagerbestand } = useContext(lagerbestandContext);
   const [stock, setStock] = useState(Number(lagerbestand.stock));
   const initialStock = Number(stock);
 
@@ -27,7 +26,7 @@ export default function TableLagerbestand({ lagerbestand, onDelete }) {
     const { data, error } = await supabase
       .from("lagerbestand")
       .update({ stock: stock })
-      .eq("id", id)
+      .eq("id", lagerbestand.id)
       .select();
 
     if (error) {
@@ -51,7 +50,6 @@ export default function TableLagerbestand({ lagerbestand, onDelete }) {
     }
     if (data) {
       onDelete(lagerbestand.id);
-      setLagerbestand(lagerbestand.id);
     }
   };
 

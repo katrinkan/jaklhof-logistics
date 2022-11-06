@@ -1,12 +1,12 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import styles from "../styles/Lagerbestand.module.css";
 import TableLagerbestand from "../components/TableLagerbestand";
 import AddProduct from "../components/AddProduct";
 import { supabase } from "../utils/supabaseClient";
-import useFetchLagerbestand from "../helpers/useFetchLagerbestand";
+import { lagerbestandContext } from "../pages/lagerbestand";
 
 export default function ChangeCategory() {
-  const { setLagerbestand, fetchError } = useFetchLagerbestand();
+  const { setLagerbestand, fetchError } = useContext(lagerbestandContext);
   const [category, setCategory] = useState(null);
   const [showAddProduct, setShowAddProduct] = useState(false);
 
