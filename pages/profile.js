@@ -16,7 +16,7 @@ export default function Profile({ session }) {
 
   useEffect(() => {
     getProfile();
-  }, [session]);
+  });
 
   async function getProfile() {
     try {
@@ -108,7 +108,7 @@ export default function Profile({ session }) {
       </form>
 
       <div className={styles.logo}>
-        <Image src={jaklhofSonne} width={90} height={90} />
+        <Image src={jaklhofSonne} width={90} height={90} alt="Jaklhof logo" />
       </div>
     </div>
   );

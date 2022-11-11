@@ -1,5 +1,4 @@
 import Head from "next/head";
-import styles from "../styles/Login.module.css";
 import Image from "next/image";
 import jaklhofSonne from "../public/jaklhof-sonne.png";
 import { useState } from "react";
@@ -28,31 +27,25 @@ export default function SignUp() {
       <Head>
         <title>SignUp - Jaklhof Logistics</title>
       </Head>
-      <h1 className={styles.heading}>Sign Up</h1>
-      <form className={styles.loginForm}>
-        <label htmlFor="email" className={styles.labelEmail}>
-          Email
-        </label>
+      <h1>Sign Up</h1>
+      <form>
+        <label htmlFor="email">Email</label>
         <br />
         <input
           type="email"
           name="email"
           placeholder="Email"
-          className={styles.formContent}
           value={email}
           onChange={(event) => setEmail(event.target.value)}
         />
         <br />
         <br />
-        <label htmlFor="password" className={styles.labelPassword}>
-          Password
-        </label>
+        <label htmlFor="password">Password</label>
         <br />
         <input
           type="password"
           name="password"
           placeholder="Wähle ein Passwort"
-          className={styles.formContent}
           value={password}
           onChange={(event) => setPassword(event.target.value)}
         />
@@ -60,8 +53,8 @@ export default function SignUp() {
       <button className="btn" onClick={signUp}>
         Sign Up
       </button>
-      <div className={styles.logo}>
-        <Image src={jaklhofSonne} width={90} height={90} />
+      <div>
+        <Image src={jaklhofSonne} width={90} height={90} alt="Jaklhof logo" />
       </div>
     </div>
   );

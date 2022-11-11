@@ -23,7 +23,12 @@ export default function Navbar() {
       <nav>
         <Link href={"/dashboard"}>
           <a>
-            <Image src={jaklhofLogo} width={90} height={40} />
+            <Image
+              src={jaklhofLogo}
+              width={90}
+              height={40}
+              alt="Jaklhof Word logo"
+            />
           </a>
         </Link>
         <div onClick={() => setNavActive(!navActive)} className="nav__menuBar">

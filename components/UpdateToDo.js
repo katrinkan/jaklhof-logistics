@@ -35,7 +35,7 @@ export default function UpdateToDo(props) {
   const user = useUser();
   useEffect(() => {
     getProfile();
-  }, [session]);
+  });
 
   async function getProfile() {
     try {
@@ -75,7 +75,7 @@ export default function UpdateToDo(props) {
       }
     };
     fetchAnsaatplan();
-  }, []);
+  });
 
   return (
     <>

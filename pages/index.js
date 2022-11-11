@@ -48,7 +48,7 @@ export default function Home() {
   const user = useUser();
   useEffect(() => {
     getProfile();
-  }, [session]);
+  });
 
   async function getProfile() {
     try {
@@ -98,7 +98,12 @@ export default function Home() {
             }}
           />
           <div className="logo">
-            <Image src={jaklhofSonne} width={90} height={90} />
+            <Image
+              src={jaklhofSonne}
+              width={90}
+              height={90}
+              alt="Jaklhof logo"
+            />
           </div>
         </div>
       ) : (
