@@ -46,7 +46,7 @@ export default function OrderCard({ order }) {
   const user = useUser();
   useEffect(() => {
     getProfile();
-  });
+  }, [session]);
 
   async function getProfile() {
     try {

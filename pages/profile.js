@@ -16,7 +16,7 @@ export default function Profile({ session }) {
 
   useEffect(() => {
     getProfile();
-  });
+  }, [session]);
 
   async function getProfile() {
     try {
@@ -52,10 +52,8 @@ export default function Profile({ session }) {
         updated_at: new Date().toISOString(),
       };
       let { error } = await supabase.from("profiles").upsert(updates);
-      if (error) {
-        throw error;
-        alert("Profile updated!");
-      }
+      if (error) throw error;
+      alert("Profile updated!");
     } catch (error) {
       alert("Error updating the data!");
       console.log(error);
