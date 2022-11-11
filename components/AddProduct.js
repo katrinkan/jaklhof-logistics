@@ -3,9 +3,9 @@ import { supabase } from "../utils/supabaseClient";
 import styles from "./AddProduct.module.css";
 
 export default function AddProduct() {
-  const [category, setCategory] = useState(null);
-  const [title, setTitle] = useState(null);
-  const [stock, setStock] = useState(null);
+  const [category, setCategory] = useState("");
+  const [title, setTitle] = useState("");
+  const [stock, setStock] = useState("");
   const [formError, setFormError] = useState(null);
 
   const handleSubmit = async (event) => {

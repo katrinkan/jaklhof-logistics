@@ -68,7 +68,7 @@ export default function Profile({ session }) {
     const { error } = await supabase.auth.signOut();
     router.push("/");
   }
-
+  console.log(user);
   return (
     <div>
       <Head>

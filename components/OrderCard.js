@@ -1,9 +1,11 @@
 import { useSession, useUser } from "@supabase/auth-helpers-react";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { supabase } from "../utils/supabaseClient";
 import styles from "./OrderCard.module.css";
+import { OrderContext } from "../pages/ordermanagement";
 
-export default function OrderCard({ order, onDelete }) {
+export default function OrderCard({ order }) {
+  const { onDelete } = useContext(OrderContext);
   const [username, setUsername] = useState(null);
   const [disabled, setDisabled] = useState(false);
   const session = useSession();

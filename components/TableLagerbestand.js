@@ -1,10 +1,10 @@
 import { useContext, useState } from "react";
-import { lagerbestandContext } from "../pages/lagerbestand";
+import { LagerbestandContext } from "../pages/lagerbestand";
 import styles from "../styles/Lagerbestand.module.css";
 import { supabase } from "../utils/supabaseClient";
 
-export default function TableLagerbestand({ lagerbestand, onDelete }) {
-  const { setLagerbestand } = useContext(lagerbestandContext);
+export default function TableLagerbestand({ lagerbestand }) {
+  const { onDelete, setLagerbestand } = useContext(LagerbestandContext);
   const [stock, setStock] = useState(Number(lagerbestand.stock));
   const initialStock = Number(stock);
 
@@ -34,6 +34,7 @@ export default function TableLagerbestand({ lagerbestand, onDelete }) {
     }
     if (data) {
       console.log(data);
+      setLagerbestand(data);
     }
   };
 
@@ -89,7 +90,7 @@ export default function TableLagerbestand({ lagerbestand, onDelete }) {
         <label className={styles.label}>Hinzufügen</label>
         <input
           className={styles.input}
-          type="text"
+          type="number"
           id="add"
           onChange={handleAddition}
         />
@@ -98,7 +99,7 @@ export default function TableLagerbestand({ lagerbestand, onDelete }) {
         <label className={styles.label}>Entnehmen</label>
         <input
           className={styles.input}
-          type="text"
+          type="number"
           id="remove"
           onChange={handleSubtraction}
         />

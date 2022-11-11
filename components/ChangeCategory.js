@@ -3,10 +3,10 @@ import styles from "../styles/Lagerbestand.module.css";
 import TableLagerbestand from "../components/TableLagerbestand";
 import AddProduct from "../components/AddProduct";
 import { supabase } from "../utils/supabaseClient";
-import { lagerbestandContext } from "../pages/lagerbestand";
+import { LagerbestandContext } from "../pages/lagerbestand";
 
 export default function ChangeCategory() {
-  const { setLagerbestand, fetchError } = useContext(lagerbestandContext);
+  const { fetchError } = useContext(LagerbestandContext);
   const [category, setCategory] = useState(null);
   const [showAddProduct, setShowAddProduct] = useState(false);
 
@@ -15,11 +15,6 @@ export default function ChangeCategory() {
     setShowAddProduct((current) => !current);
   };
 
-  const handleDelete = (id) => {
-    setLagerbestand((prevLagerbestand) => {
-      return prevLagerbestand.filter((lagerbestand) => lagerbestand.id !== id);
-    });
-  };
   const handleCategoryChange = async (event) => {
     event.preventDefault();
     const { data, error } = await supabase
@@ -81,11 +76,7 @@ export default function ChangeCategory() {
                 <h5 className={styles.heading}></h5>
               </div>
               {category.map((category) => (
-                <TableLagerbestand
-                  key={category.id}
-                  lagerbestand={category}
-                  onDelete={handleDelete}
-                />
+                <TableLagerbestand key={category.id} lagerbestand={category} />
               ))}
             </div>
           </form>

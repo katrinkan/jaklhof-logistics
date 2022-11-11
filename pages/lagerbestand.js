@@ -4,35 +4,41 @@ import ChangeCategory from "../components/ChangeCategory";
 import Navbar from "../components/Navbar";
 import { supabase } from "../utils/supabaseClient";
 
-export const lagerbestandContext = createContext();
+export const LagerbestandContext = createContext();
 
-export default function Lagerbestand(props) {
+export default function Lagerbestand() {
   const [fetchError, setFetchError] = useState(null);
   const [lagerbestand, setLagerbestand] = useState(null);
 
-  useEffect(() => {
-    const fetchLagerbestand = async () => {
-      const { data, error } = await supabase
-        .from("lagerbestand")
-        .select()
-        .order("title", { ascending: true });
+  const onDelete = (id) => {
+    setLagerbestand((prevLagerbestand) => {
+      return prevLagerbestand.filter((lagerbestand) => lagerbestand.id !== id);
+    });
+  };
 
-      if (error) {
-        setFetchError("Could not fetch Lagerbestand");
-        setLagerbestand(null);
-        console.log(error);
-      }
-      if (data) {
-        setLagerbestand(data);
-        setFetchError(null);
-      }
-    };
+  useEffect(() => {
     fetchLagerbestand();
   }, []);
+  const fetchLagerbestand = async () => {
+    const { data, error } = await supabase
+      .from("lagerbestand")
+      .select()
+      .order("title", { ascending: true });
 
-  const value = { lagerbestand, setLagerbestand, fetchError };
+    if (error) {
+      setFetchError("Could not fetch Lagerbestand");
+      setLagerbestand(null);
+      console.log(error);
+    }
+    if (data) {
+      setLagerbestand(data);
+      setFetchError(null);
+    }
+  };
+
+  const value = { lagerbestand, setLagerbestand, fetchError, onDelete };
   return (
-    <lagerbestandContext.Provider value={value}>
+    <LagerbestandContext.Provider value={value}>
       <Head>
         <title>Lagerbestand - Jaklhof Logistics</title>
       </Head>
@@ -40,6 +46,6 @@ export default function Lagerbestand(props) {
       <div className="container">
         <ChangeCategory />
       </div>
-    </lagerbestandContext.Provider>
+    </LagerbestandContext.Provider>
   );
 }
