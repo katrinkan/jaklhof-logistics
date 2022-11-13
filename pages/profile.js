@@ -2,53 +2,28 @@ import Head from "next/head";
 import Image from "next/image";
 import jaklhofSonne from "../public/jaklhof-sonne.png";
 import styles from "../styles/Profile.module.css";
-import { useState, useEffect } from "react";
-import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
-import { useRouter } from "next/router";
+import { useState, useEffect, useContext } from "react";
+import {
+  useUser,
+  useSupabaseClient,
+  useSession,
+} from "@supabase/auth-helpers-react";
 import Navbar from "../components/Navbar";
+import { ProfileContext } from ".";
 
-export default function Profile({ session }) {
-  const router = useRouter();
+export default function Profile() {
   const supabase = useSupabaseClient();
-  const user = useUser();
   const [loading, setLoading] = useState(true);
-  const [username, setUsername] = useState(null);
+  const [newUsername, setNewUsername] = useState(username);
+  const { username, signOut } = useContext(ProfileContext);
 
-  useEffect(() => {
-    getProfile();
-  }, [session]);
-
-  async function getProfile() {
-    try {
-      setLoading(true);
-
-      let { data, error, status } = await supabase
-        .from("profiles")
-        .select(`username`)
-        .eq("id", user.id)
-        .single();
-
-      if (error && status !== 406) {
-        throw error;
-      }
-      if (data) {
-        setUsername(data.username);
-      }
-    } catch (error) {
-      alert("Error loading user data!");
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  async function updateProfile({ username }) {
+  async function updateProfile() {
     try {
       setLoading(true);
 
       const updates = {
         id: user.id,
-        username,
+        username: newUsername,
         updated_at: new Date().toISOString(),
       };
       let { error } = await supabase.from("profiles").upsert(updates);
@@ -62,11 +37,6 @@ export default function Profile({ session }) {
     }
   }
 
-  async function signOut() {
-    const { error } = await supabase.auth.signOut();
-    router.push("/");
-  }
-  console.log(user);
   return (
     <div>
       <Head>
@@ -86,15 +56,15 @@ export default function Profile({ session }) {
           className={styles.formContent}
           value={username || ""}
           onChange={(event) => {
-            setUsername(event.target.value);
+            setNewUsername(event.target.value);
           }}
         />
         <br />
         <button
           className="btn"
           onClick={() => {
-            updateProfile({ username });
-            setUsername("");
+            updateProfile(username);
+            setNewUsername("");
           }}
           disabled={loading}
         >

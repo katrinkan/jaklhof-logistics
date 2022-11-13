@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, createContext } from "react";
 import jaklhofSonne from "../public/jaklhof-sonne.png";
 import { Auth } from "@supabase/auth-ui-react";
 import {
@@ -9,6 +9,8 @@ import {
   useUser,
 } from "@supabase/auth-helpers-react";
 import Dashboard from "./dashboard";
+
+export const ProfileContext = createContext();
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
@@ -45,6 +47,13 @@ export default function Home() {
     },
   };
 
+  async function signOut(event) {
+    event.preventDefault();
+    const { error } = await supabase.auth.signOut();
+    setUsername("");
+    console.log(error);
+  }
+
   const user = useUser();
   useEffect(() => {
     getProfile();
@@ -72,9 +81,9 @@ export default function Home() {
       setLoading(false);
     }
   }
-
+  const value = { username, signOut };
   return (
-    <>
+    <ProfileContext.Provider value={value}>
       <Head>
         <title>Willkommen - Jaklhof Logistics</title>
       </Head>
@@ -107,8 +116,8 @@ export default function Home() {
           </div>
         </div>
       ) : (
-        <Dashboard session={session} />
+        <Dashboard />
       )}
-    </>
+    </ProfileContext.Provider>
   );
 }

@@ -2,37 +2,12 @@ import Head from "next/head";
 import Link from "next/link";
 import Navbar from "../components/Navbar";
 import styles from "../styles/Dashboard.module.css";
-import { useEffect, useState } from "react";
-import { useSession, useUser } from "@supabase/auth-helpers-react";
-import { supabase } from "../utils/supabaseClient";
+import { useContext } from "react";
+import { ProfileContext } from "./index";
 
-export default function Dashboard(props) {
-  const [username, setUsername] = useState(null);
-  const session = useSession();
-  const user = useUser();
-  useEffect(() => {
-    getProfile();
-  }, [session]);
+export default function Dashboard() {
+  const { username } = useContext(ProfileContext);
 
-  async function getProfile() {
-    try {
-      let { data, error, status } = await supabase
-        .from("profiles")
-        .select("username")
-        .eq("id", user.id)
-        .single();
-
-      if (error && status !== 406) {
-        throw error;
-      }
-      if (data) {
-        setUsername(data.username);
-      }
-    } catch (error) {
-      console.log(error.message);
-    }
-  }
-  console.log(props.session);
   return (
     <div>
       <Head>
