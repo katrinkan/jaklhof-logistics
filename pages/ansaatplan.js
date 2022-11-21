@@ -1,16 +1,18 @@
 import Head from "next/head";
-import { useState, useEffect } from "react";
+import { useState, useEffect, createContext } from "react";
 import Navbar from "../components/Navbar";
 import TableAnsaatplan from "../components/TableAnsaatplan";
 import { supabase } from "../utils/supabaseClient";
 import styles from "../styles/Ansaatplan.module.css";
+
+export const AnsaatplanContext = createContext();
 
 export default function Ansaatplan(props) {
   const [weekSelect, setWeekSelect] = useState(props.week);
   const [fetchError, setFetchError] = useState(null);
   const [ansaatplan, setAnsaatplan] = useState(null);
 
-  const handleDelete = (id) => {
+  const onDelete = (id) => {
     setAnsaatplan((prevAnsaatplan) => {
       return prevAnsaatplan.filter((ansaatplan) => ansaatplan.id !== id);
     });
@@ -40,8 +42,10 @@ export default function Ansaatplan(props) {
     fetchAnsaatplan();
   }, []);
 
+  const value = { ansaatplan, weekSelect, onDelete };
+
   return (
-    <>
+    <AnsaatplanContext.Provider value={value}>
       <Head>
         <title>Ansaatplan - Jaklhof Logistics</title>
       </Head>
@@ -68,15 +72,10 @@ export default function Ansaatplan(props) {
         {fetchError && <p>{fetchError}</p>}
         {ansaatplan && (
           <>
-            <TableAnsaatplan
-              key={ansaatplan.id}
-              ansaatplan={ansaatplan}
-              week={weekSelect}
-              onDelete={handleDelete}
-            ></TableAnsaatplan>
+            <TableAnsaatplan />
           </>
         )}
       </div>
-    </>
+    </AnsaatplanContext.Provider>
   );
 }

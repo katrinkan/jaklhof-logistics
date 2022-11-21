@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AnsaatplanContext } from "../pages/ansaatplan";
 import { supabase } from "../utils/supabaseClient";
 import DeleteRow from "./DeleteRow";
 import styles from "./TableContent.module.css";
 
 export default function TableContent(props) {
-  const week = props.week;
+  const { weekSelect } = useContext(AnsaatplanContext);
+  const week = weekSelect;
   const [ansaatWeek, setAnsaatWeek] = useState(props.ansaatplan.week);
   const [title, setTitle] = useState(props.ansaatplan.title);
   const [amount, setAmount] = useState(props.ansaatplan.amount);
@@ -139,10 +141,7 @@ export default function TableContent(props) {
                 onClick={handleSave}
               />
 
-              <DeleteRow
-                ansaatplan={props.ansaatplan}
-                onDelete={props.onDelete}
-              />
+              <DeleteRow ansaatplan={props.ansaatplan} />
             </div>
           </div>
         </div>

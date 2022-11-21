@@ -1,21 +1,19 @@
+import { useContext } from "react";
+import { AnsaatplanContext } from "../pages/ansaatplan";
 import AddRow from "./AddRow";
 import TableContent from "./TableContent";
 
 export default function TableAnsaatplan(props) {
-  const ansaatplan = props.ansaatplan;
-  const week = props.week;
+  const { ansaatplan, weekSelect, handleDelete } =
+    useContext(AnsaatplanContext);
+
   return (
     <>
       {ansaatplan && (
         <div className="container">
-          <AddRow ansaatplan={ansaatplan} />
+          <AddRow />
           {ansaatplan.map((ansaatplan) => (
-            <TableContent
-              week={week}
-              key={ansaatplan.id}
-              ansaatplan={ansaatplan}
-              onDelete={props.handleDelete}
-            />
+            <TableContent key={ansaatplan.id} ansaatplan={ansaatplan} />
           ))}
         </div>
       )}

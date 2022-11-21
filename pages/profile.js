@@ -9,13 +9,42 @@ import {
   useSession,
 } from "@supabase/auth-helpers-react";
 import Navbar from "../components/Navbar";
-import { ProfileContext } from ".";
 
 export default function Profile() {
   const supabase = useSupabaseClient();
+  const user = useUser();
+  const session = useSession();
   const [loading, setLoading] = useState(true);
-  const [newUsername, setNewUsername] = useState(username);
-  const { username, signOut } = useContext(ProfileContext);
+  const [username, setUsername] = useState("");
+  const [newUsername, setNewUsername] = useState(null);
+
+  useEffect(() => {
+    getProfile();
+  }, [session]);
+
+  async function getProfile() {
+    try {
+      setLoading(true);
+
+      let { data, error, status } = await supabase
+        .from("profiles")
+        .select(`username`)
+        .eq("id", user.id)
+        .single();
+
+      if (error && status !== 406) {
+        throw error;
+      }
+      if (data) {
+        setUsername(data.username);
+      }
+    } catch (error) {
+      alert("Error loading user data!");
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  }
 
   async function updateProfile() {
     try {
@@ -69,9 +98,6 @@ export default function Profile() {
           disabled={loading}
         >
           {loading ? "Loading..." : "Änderung speichern"}
-        </button>
-        <button className="btn" onClick={signOut}>
-          Log Out
         </button>
       </form>
 

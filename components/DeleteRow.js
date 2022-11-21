@@ -1,6 +1,9 @@
+import { useContext } from "react";
+import { AnsaatplanContext } from "../pages/ansaatplan";
 import { supabase } from "../utils/supabaseClient";
 
-export default function DeleteRow({ ansaatplan, onDelete }) {
+export default function DeleteRow({ ansaatplan }) {
+  const { onDelete } = useContext(AnsaatplanContext);
   const handleDelete = async () => {
     const { data, error } = await supabase
       .from("ansaatplan")

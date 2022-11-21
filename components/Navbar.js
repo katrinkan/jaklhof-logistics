@@ -5,7 +5,7 @@ import React, { useContext, useState } from "react";
 import { supabase } from "../utils/supabaseClient";
 import jaklhofLogo from "../public/jaklhof-logo.png";
 import NavItem from "./NavItem";
-import { ProfileContext } from "../pages";
+import { ProfileContext } from "../pages/index";
 
 const MenuList = [
   { text: "To Do", href: "/todo" },
@@ -15,7 +15,6 @@ const MenuList = [
 ];
 
 export default function Navbar() {
-  const { signOut } = useContext(ProfileContext);
   const router = useRouter();
   const [navActive, setNavActive] = useState(null);
   const [activeIdx, setActiveIdx] = useState(-1);
@@ -50,9 +49,7 @@ export default function Navbar() {
               <NavItem active={activeIdx === idx} {...menu} />
             </div>
           ))}
-          <button className="logOutBtn" onClick={signOut}>
-            Log out
-          </button>
+          <button className="logOutBtn">Log out</button>
         </div>
       </nav>
     </header>
